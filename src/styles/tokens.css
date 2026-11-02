@@ -1,0 +1,59 @@
+/* NEXUS design tokens: visual language v2 "A × C" (approved 2026-10-26, replaces D0). The single source
+   of truth. Tailwind's default colours, fonts and sizes are cleared, so only these exist as utilities
+   (bg-panel, text-muted, font-display, text-sm, ...). src/lib/contrast.test.ts checks every text pair
+   for WCAG AA; re-run it after changing a colour. */
+@theme {
+  --color-*: initial;
+  --color-bg: #0C1120;      /* page ground (navy) */
+  --color-deep: #070B19;    /* the rail and the phone top bar: the darkest surface (5.2c) */
+  --color-panel: #131A2D;   /* cards, map, drawers */
+  --color-raised: #1B2339;  /* rows, controls, active nav */
+  --color-rule: #232C45;    /* hairlines, decoration only */
+  --color-glass: rgb(255 255 255 / 0.08); /* the glass hairline on console cards (5.2), decoration only */
+  --color-glow-teal: #1D4E5C;   /* the teal light, decoration only: muted and dead text fail on its peak */
+  --color-glow-indigo: #2B2F6B; /* the indigo light, decoration only */
+  --color-track: #64708F;   /* unlit track and other lines: 3:1 on bg, panel and raised */
+  --color-muted: #A4AEC6;   /* secondary text */
+  --color-ink: #EEF1F8;     /* text */
+  --color-route: #7CCFE3;   /* the lit route, actions, links, focus */
+  --color-ok: #7BD69C;      /* sent */
+  --color-retry: #F2B24C;   /* failed, will retry (amber means retry or warning, nothing else) */
+  --color-dead: #F47F6E;    /* gave up */
+
+  --font-*: initial;
+  --font-display: "Barlow Semi Condensed", "Segoe UI", system-ui, sans-serif; /* headings, map labels */
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;            /* interface */
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;            /* times, ids */
+
+  /* Type scale. 14px is the minimum: there is no smaller step. sm–xl serve the console; reading and
+     2xl–6xl are the v2 landing and story sizes. */
+  --text-*: initial;
+  --text-sm: 0.875rem;  /* 14px */
+  --text-sm--line-height: 1.25rem;
+  --text-base: 0.9375rem; /* 15px */
+  --text-base--line-height: 1.375rem;
+  --text-md: 1.0625rem; /* 17px */
+  --text-md--line-height: 1.625rem;
+  --text-reading: 1.125rem; /* 18px, v2 reading text */
+  --text-reading--line-height: 1.75rem;
+  --text-lg: 1.375rem;  /* 22px */
+  --text-lg--line-height: 1.75rem;
+  --text-2xl: 1.625rem; /* 26px, card titles */
+  --text-2xl--line-height: 1.875rem;
+  --text-3xl: 1.75rem;  /* 28px, v2 large text */
+  --text-3xl--line-height: 2.25rem;
+  --text-xl: 2rem;      /* 32px */
+  --text-xl--line-height: 2.375rem;
+  --text-4xl: 2.75rem;  /* 44px, small sections */
+  --text-4xl--line-height: 2.875rem;
+  --text-5xl: 3.5rem;   /* 56px, sections */
+  --text-5xl--line-height: 3.5rem;
+  --text-6xl: 4.5rem;   /* 72px, hero */
+  --text-6xl--line-height: 4.25rem;
+
+  /* v2 edges: 10 for buttons and rows, 14 for cards; chips are round (rounded-full). */
+  --radius-*: initial;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 14px;
+}

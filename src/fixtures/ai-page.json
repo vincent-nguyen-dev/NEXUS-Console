@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "label": "Recorded AI usage",
+    "source": "GET https://northstar-digital-api.onrender.com/api/ops/ai",
+    "captured_at": "2026-10-31T08:53:03.230214+00:00",
+    "note": "Frozen copy of Northstar's AI feed with its description (N3), for tests. Rows carry no message text."
+  },
+  "page": {
+    "now": "2026-10-31T08:53:03.230214+00:00",
+    "truncated": false,
+    "ai": {
+      "version": 1,
+      "call": {
+        "one": "chat",
+        "many": "chats"
+      },
+      "outcomes": [
+        {
+          "code": "ok",
+          "label": "answered",
+          "answered": true
+        },
+        {
+          "code": "provider_error",
+          "label": "AI service error",
+          "answered": false
+        },
+        {
+          "code": "timeout",
+          "label": "timed out",
+          "answered": false
+        }
+      ],
+      "timeout_s": 30,
+      "retention_days": 90,
+      "models": [
+        {
+          "name": "gpt-4o-mini",
+          "usd_per_m_in": 0.15,
+          "usd_per_m_out": 0.6,
+          "priced_on": "2026-10-31",
+          "source": "https://developers.openai.com/api/docs/models/gpt-4o-mini"
+        },
+        {
+          "name": "mock",
+          "usd_per_m_in": 0,
+          "usd_per_m_out": 0,
+          "priced_on": null,
+          "source": "the built-in mock answers; no model is called"
+        }
+      ]
+    },
+    "calls": [
+      {
+        "at": "2026-10-30T15:55:56.081522+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1357,
+        "tokens_out": 95,
+        "latency_ms": 3054,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-29T16:07:12.922576+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1359,
+        "tokens_out": 63,
+        "latency_ms": 2949,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-28T16:00:22.902360+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1356,
+        "tokens_out": 102,
+        "latency_ms": 3462,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-27T09:48:29.077916+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1359,
+        "tokens_out": 94,
+        "latency_ms": 3004,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-26T09:52:08.288336+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1357,
+        "tokens_out": 121,
+        "latency_ms": 5355,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-25T09:39:44.566758+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1359,
+        "tokens_out": 82,
+        "latency_ms": 2424,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-25T07:15:58.448167+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1359,
+        "tokens_out": 93,
+        "latency_ms": 1652,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-25T07:07:19.693749+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1486,
+        "tokens_out": 142,
+        "latency_ms": 2975,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T08:17:35.105789+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1490,
+        "tokens_out": 132,
+        "latency_ms": 2023,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T08:12:35.898931+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1278,
+        "tokens_out": 143,
+        "latency_ms": 2263,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T08:00:22.850625+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1730,
+        "tokens_out": 108,
+        "latency_ms": 1753,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T07:59:41.056896+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1703,
+        "tokens_out": 102,
+        "latency_ms": 3507,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:51:15.965981+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1705,
+        "tokens_out": 99,
+        "latency_ms": 2240,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:51:07.664865+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1716,
+        "tokens_out": 34,
+        "latency_ms": 1118,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:49:09.107074+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1707,
+        "tokens_out": 67,
+        "latency_ms": 1714,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:48:35.368585+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1670,
+        "tokens_out": 72,
+        "latency_ms": 1377,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:47:54.011417+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1632,
+        "tokens_out": 75,
+        "latency_ms": 1583,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:47:38.399493+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1562,
+        "tokens_out": 101,
+        "latency_ms": 2099,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:44:46.256323+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1668,
+        "tokens_out": 34,
+        "latency_ms": 925,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:44:24.154388+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1583,
+        "tokens_out": 58,
+        "latency_ms": 1166,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:44:04.453102+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1528,
+        "tokens_out": 42,
+        "latency_ms": 1906,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:43:54.264913+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1472,
+        "tokens_out": 42,
+        "latency_ms": 984,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:43:26.516323+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1424,
+        "tokens_out": 35,
+        "latency_ms": 1476,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-24T06:42:57.912889+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1272,
+        "tokens_out": 140,
+        "latency_ms": 4154,
+        "outcome": "ok"
+      },
+      {
+        "at": "2026-10-23T05:34:42.232376+00:00",
+        "model": "gpt-4o-mini",
+        "tokens_in": 1203,
+        "tokens_out": 52,
+        "latency_ms": 2505,
+        "outcome": "ok"
+      }
+    ]
+  }
+}

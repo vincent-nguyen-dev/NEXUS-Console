@@ -1,0 +1,759 @@
+{
+  "now": "2026-10-28T12:00:00+00:00",
+  "truncated": false,
+  "workflow": {
+    "version": 1,
+    "trigger": {
+      "one": "order",
+      "many": "orders"
+    },
+    "steps": [
+      {
+        "kind": "charge_card",
+        "label": "Card payment",
+        "purpose": "Charges the card for the order.",
+        "delivers": "payment",
+        "always_simulated": false,
+        "starts_after_s": 0,
+        "max_attempts": 3,
+        "backoff_s": [
+          5,
+          60
+        ],
+        "results": [
+          {
+            "code": "charged",
+            "outcome": "delivered",
+            "label": "payment taken"
+          },
+          {
+            "code": "declined",
+            "outcome": "skipped",
+            "label": "card declined"
+          }
+        ]
+      },
+      {
+        "kind": "send_receipt",
+        "label": "Receipt",
+        "purpose": "Mails the receipt an hour after the order.",
+        "delivers": null,
+        "always_simulated": false,
+        "starts_after_s": 3600,
+        "max_attempts": 2,
+        "backoff_s": [
+          30
+        ],
+        "results": [
+          {
+            "code": "mailed",
+            "outcome": "done",
+            "label": "receipt mailed"
+          },
+          {
+            "code": "not_paid",
+            "outcome": "skipped",
+            "label": "skipped, order not paid"
+          }
+        ]
+      }
+    ],
+    "errors": [
+      {
+        "code": "gateway_down",
+        "label": "payment gateway down",
+        "sends_nothing": true
+      }
+    ],
+    "flags": [
+      {
+        "key": "test_card",
+        "label": "Test card",
+        "effect": "uses a card that fails its first tries"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "run_id": "r_3b9b37e365ad",
+      "created_at": "2026-10-28T11:50:00+00:00",
+      "flags": [
+        "test_card"
+      ],
+      "steps": [
+        {
+          "kind": "charge_card",
+          "status": "succeeded",
+          "attempts": 2,
+          "max_attempts": 3,
+          "run_after": "2026-10-28T11:50:00+00:00",
+          "result": "charged",
+          "last_error": "gateway_down",
+          "updated_at": "2026-10-28T11:50:05.900000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "status": "queued",
+          "attempts": 0,
+          "max_attempts": 2,
+          "run_after": "2026-10-28T12:50:00+00:00",
+          "result": null,
+          "last_error": null,
+          "updated_at": "2026-10-28T11:50:00+00:00"
+        }
+      ],
+      "events": [
+        {
+          "kind": "charge_card",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-28T11:50:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-28T11:50:00+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-28T11:50:00.200000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "failed",
+          "attempt": 1,
+          "detail": "gateway_down",
+          "at": "2026-10-28T11:50:00.500000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "retry_scheduled",
+          "attempt": 1,
+          "detail": "5",
+          "at": "2026-10-28T11:50:00.500000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 2,
+          "detail": null,
+          "at": "2026-10-28T11:50:05.600000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "succeeded",
+          "attempt": 2,
+          "detail": "charged",
+          "at": "2026-10-28T11:50:05.900000+00:00"
+        }
+      ]
+    },
+    {
+      "run_id": "r_c0c681c1cdd6",
+      "created_at": "2026-10-28T11:30:00+00:00",
+      "flags": [],
+      "steps": [
+        {
+          "kind": "charge_card",
+          "status": "succeeded",
+          "attempts": 1,
+          "max_attempts": 3,
+          "run_after": "2026-10-28T11:30:00+00:00",
+          "result": "charged",
+          "last_error": null,
+          "updated_at": "2026-10-28T11:30:00.500000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "status": "queued",
+          "attempts": 0,
+          "max_attempts": 2,
+          "run_after": "2026-10-28T12:30:00+00:00",
+          "result": null,
+          "last_error": null,
+          "updated_at": "2026-10-28T11:30:00+00:00"
+        }
+      ],
+      "events": [
+        {
+          "kind": "charge_card",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-28T11:30:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-28T11:30:00+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-28T11:30:00.200000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "succeeded",
+          "attempt": 1,
+          "detail": "charged",
+          "at": "2026-10-28T11:30:00.500000+00:00"
+        }
+      ]
+    },
+    {
+      "run_id": "r_fc8483b6d01a",
+      "created_at": "2026-10-27T09:20:00+00:00",
+      "flags": [
+        "test_card"
+      ],
+      "steps": [
+        {
+          "kind": "charge_card",
+          "status": "dead",
+          "attempts": 3,
+          "max_attempts": 3,
+          "run_after": "2026-10-27T09:20:00+00:00",
+          "result": null,
+          "last_error": "gateway_down",
+          "updated_at": "2026-10-27T09:21:06.300000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "status": "succeeded",
+          "attempts": 1,
+          "max_attempts": 2,
+          "run_after": "2026-10-27T10:20:00+00:00",
+          "result": "not_paid",
+          "last_error": null,
+          "updated_at": "2026-10-27T10:20:00.100000+00:00"
+        }
+      ],
+      "events": [
+        {
+          "kind": "charge_card",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-27T09:20:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-27T09:20:00+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-27T09:20:00.200000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "failed",
+          "attempt": 1,
+          "detail": "gateway_down",
+          "at": "2026-10-27T09:20:00.500000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "retry_scheduled",
+          "attempt": 1,
+          "detail": "5",
+          "at": "2026-10-27T09:20:00.500000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 2,
+          "detail": null,
+          "at": "2026-10-27T09:20:05.600000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "failed",
+          "attempt": 2,
+          "detail": "gateway_down",
+          "at": "2026-10-27T09:20:05.900000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "retry_scheduled",
+          "attempt": 2,
+          "detail": "60",
+          "at": "2026-10-27T09:20:05.900000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 3,
+          "detail": null,
+          "at": "2026-10-27T09:21:06+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "failed",
+          "attempt": 3,
+          "detail": "gateway_down",
+          "at": "2026-10-27T09:21:06.300000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "dead",
+          "attempt": 3,
+          "detail": null,
+          "at": "2026-10-27T09:21:06.300000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-27T10:20:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "succeeded",
+          "attempt": 1,
+          "detail": "not_paid",
+          "at": "2026-10-27T10:20:00.100000+00:00"
+        }
+      ]
+    },
+    {
+      "run_id": "r_e41699204345",
+      "created_at": "2026-10-26T18:45:00+00:00",
+      "flags": [
+        "test_card"
+      ],
+      "steps": [
+        {
+          "kind": "charge_card",
+          "status": "succeeded",
+          "attempts": 3,
+          "max_attempts": 3,
+          "run_after": "2026-10-26T18:45:00+00:00",
+          "result": "charged",
+          "last_error": "gateway_down",
+          "updated_at": "2026-10-26T18:46:06.300000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "status": "succeeded",
+          "attempts": 1,
+          "max_attempts": 2,
+          "run_after": "2026-10-26T19:45:00+00:00",
+          "result": "mailed",
+          "last_error": null,
+          "updated_at": "2026-10-26T19:45:00.100000+00:00"
+        }
+      ],
+      "events": [
+        {
+          "kind": "charge_card",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-26T18:45:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-26T18:45:00+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-26T18:45:00.200000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "failed",
+          "attempt": 1,
+          "detail": "gateway_down",
+          "at": "2026-10-26T18:45:00.500000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "retry_scheduled",
+          "attempt": 1,
+          "detail": "5",
+          "at": "2026-10-26T18:45:00.500000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 2,
+          "detail": null,
+          "at": "2026-10-26T18:45:05.600000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "failed",
+          "attempt": 2,
+          "detail": "gateway_down",
+          "at": "2026-10-26T18:45:05.900000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "retry_scheduled",
+          "attempt": 2,
+          "detail": "60",
+          "at": "2026-10-26T18:45:05.900000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 3,
+          "detail": null,
+          "at": "2026-10-26T18:46:06+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "succeeded",
+          "attempt": 3,
+          "detail": "charged",
+          "at": "2026-10-26T18:46:06.300000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-26T19:45:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "succeeded",
+          "attempt": 1,
+          "detail": "mailed",
+          "at": "2026-10-26T19:45:00.100000+00:00"
+        }
+      ]
+    },
+    {
+      "run_id": "r_4a76b5052e12",
+      "created_at": "2026-10-26T11:00:00+00:00",
+      "flags": [],
+      "steps": [
+        {
+          "kind": "charge_card",
+          "status": "succeeded",
+          "attempts": 1,
+          "max_attempts": 3,
+          "run_after": "2026-10-26T11:00:00+00:00",
+          "result": "charged",
+          "last_error": null,
+          "updated_at": "2026-10-26T11:00:00.500000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "status": "succeeded",
+          "attempts": 1,
+          "max_attempts": 2,
+          "run_after": "2026-10-26T12:00:00+00:00",
+          "result": "mailed",
+          "last_error": null,
+          "updated_at": "2026-10-26T12:00:00.100000+00:00"
+        }
+      ],
+      "events": [
+        {
+          "kind": "charge_card",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-26T11:00:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-26T11:00:00+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-26T11:00:00.200000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "succeeded",
+          "attempt": 1,
+          "detail": "charged",
+          "at": "2026-10-26T11:00:00.500000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-26T12:00:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "succeeded",
+          "attempt": 1,
+          "detail": "mailed",
+          "at": "2026-10-26T12:00:00.100000+00:00"
+        }
+      ]
+    },
+    {
+      "run_id": "r_428448cacb20",
+      "created_at": "2026-10-25T10:10:00+00:00",
+      "flags": [
+        "test_card"
+      ],
+      "steps": [
+        {
+          "kind": "charge_card",
+          "status": "succeeded",
+          "attempts": 2,
+          "max_attempts": 3,
+          "run_after": "2026-10-25T10:10:00+00:00",
+          "result": "charged",
+          "last_error": "gateway_down",
+          "updated_at": "2026-10-25T10:10:05.900000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "status": "succeeded",
+          "attempts": 1,
+          "max_attempts": 2,
+          "run_after": "2026-10-25T11:10:00+00:00",
+          "result": "mailed",
+          "last_error": null,
+          "updated_at": "2026-10-25T11:10:00.100000+00:00"
+        }
+      ],
+      "events": [
+        {
+          "kind": "charge_card",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-25T10:10:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-25T10:10:00+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-25T10:10:00.200000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "failed",
+          "attempt": 1,
+          "detail": "gateway_down",
+          "at": "2026-10-25T10:10:00.500000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "retry_scheduled",
+          "attempt": 1,
+          "detail": "5",
+          "at": "2026-10-25T10:10:00.500000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 2,
+          "detail": null,
+          "at": "2026-10-25T10:10:05.600000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "succeeded",
+          "attempt": 2,
+          "detail": "charged",
+          "at": "2026-10-25T10:10:05.900000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-25T11:10:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "succeeded",
+          "attempt": 1,
+          "detail": "mailed",
+          "at": "2026-10-25T11:10:00.100000+00:00"
+        }
+      ]
+    },
+    {
+      "run_id": "r_8710d87b53d8",
+      "created_at": "2026-10-24T15:30:00+00:00",
+      "flags": [],
+      "steps": [
+        {
+          "kind": "charge_card",
+          "status": "succeeded",
+          "attempts": 1,
+          "max_attempts": 3,
+          "run_after": "2026-10-24T15:30:00+00:00",
+          "result": "charged",
+          "last_error": null,
+          "updated_at": "2026-10-24T15:30:00.500000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "status": "succeeded",
+          "attempts": 1,
+          "max_attempts": 2,
+          "run_after": "2026-10-24T16:30:00+00:00",
+          "result": "mailed",
+          "last_error": null,
+          "updated_at": "2026-10-24T16:30:00.100000+00:00"
+        }
+      ],
+      "events": [
+        {
+          "kind": "charge_card",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-24T15:30:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-24T15:30:00+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-24T15:30:00.200000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "succeeded",
+          "attempt": 1,
+          "detail": "charged",
+          "at": "2026-10-24T15:30:00.500000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-24T16:30:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "succeeded",
+          "attempt": 1,
+          "detail": "mailed",
+          "at": "2026-10-24T16:30:00.100000+00:00"
+        }
+      ]
+    },
+    {
+      "run_id": "r_63540c48c993",
+      "created_at": "2026-10-24T09:00:00+00:00",
+      "flags": [],
+      "steps": [
+        {
+          "kind": "charge_card",
+          "status": "succeeded",
+          "attempts": 1,
+          "max_attempts": 3,
+          "run_after": "2026-10-24T09:00:00+00:00",
+          "result": "charged",
+          "last_error": null,
+          "updated_at": "2026-10-24T09:00:00.500000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "status": "succeeded",
+          "attempts": 1,
+          "max_attempts": 2,
+          "run_after": "2026-10-24T10:00:00+00:00",
+          "result": "mailed",
+          "last_error": null,
+          "updated_at": "2026-10-24T10:00:00.100000+00:00"
+        }
+      ],
+      "events": [
+        {
+          "kind": "charge_card",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-24T09:00:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "queued",
+          "attempt": 0,
+          "detail": null,
+          "at": "2026-10-24T09:00:00+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-24T09:00:00.200000+00:00"
+        },
+        {
+          "kind": "charge_card",
+          "event": "succeeded",
+          "attempt": 1,
+          "detail": "charged",
+          "at": "2026-10-24T09:00:00.500000+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "started",
+          "attempt": 1,
+          "detail": null,
+          "at": "2026-10-24T10:00:00+00:00"
+        },
+        {
+          "kind": "send_receipt",
+          "event": "succeeded",
+          "attempt": 1,
+          "detail": "mailed",
+          "at": "2026-10-24T10:00:00.100000+00:00"
+        }
+      ]
+    }
+  ]
+}

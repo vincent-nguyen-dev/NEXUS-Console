@@ -252,9 +252,12 @@ export function App() {
       <div className="flex min-w-0 flex-1 flex-col gap-4 px-4 py-4 min-[720px]:gap-6 min-[720px]:px-10 min-[720px]:py-7">
       {/* At least a screen tall, so the footer starts below the fold and doesn't jump when the runs arrive (7.1d, P3). */}
       <main id="main" tabIndex={-1} className="flex min-h-dvh min-w-0 flex-1 flex-col gap-4 min-[720px]:gap-6">
-        {/* Step 5.2 (board D1): the status pill beside the controls, the source line, the h1, then the headline. */}
+        {/* Step 5.2 (board D1): the status pill beside the controls, the source line, the h1, then the headline.
+            Beside only from 1500 px: the live pill and the feed's filter arrive with the data, and below that width they
+            no longer fit one row, so the controls dropped a row and moved the page (A.2, CLS 0.176 at 1350 px). Stacked
+            from the first frame, the row's shape depends on the window alone. */}
         <header className="flex flex-col gap-3">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-col items-start gap-3 min-[1500px]:flex-row min-[1500px]:flex-wrap min-[1500px]:items-center min-[1500px]:justify-between">
             <StatusPill
               status={status} source={source} recordedDay={RECORDED_DAY} fileLabel={fileLabel} newest={aiOn ? newestCall : newest}
               checkedAt={aiOn ? aiFeed.snapshot.lastSuccessAt : feed.snapshot.lastSuccessAt} onResume={aiOn ? aiFeed.resume : feed.resume}

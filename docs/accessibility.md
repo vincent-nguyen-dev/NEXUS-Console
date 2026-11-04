@@ -256,6 +256,23 @@ failure (see "before") weighs more. Netlify answers `/robots.txt` with a 404, wh
 - **F14, F15, T2**: no canonical (`credits.test`); `/assets/*` cached for a year (`staticRules.test`; it can only be
   seen on production, A.2); the first-try tile says "10 of 20 succeeded on try 1".
 
+## Production (A.2, 4 Nov)
+Lighthouse 13.6.0, the same presets, on https://nexus-democonsole.netlify.app with the machine idle. (A first run that
+overlapped with browser checks gave blocking times of 480–1,120 ms; an idle re-run brought them back to the preview's.)
+
+| Page | Mobile perf · a11y · bp · seo | Desktop | Note |
+|---|---|---|---|
+| `/` | 95 · 100 · 100 · 100 | 100 · 100 · 100 · 100 | |
+| `/how` | 94 · 100 · 100 · 100 | 100 · 100 · 100 · 100 | |
+| `/work` | 95 · 100 · 100 · 100 | 100 · 100 · 100 · 100 | mobile LCP 2.6 s |
+| `/console`, live | 94 · 100 · 100 · 100 | 100 · 100 · 100 · 100 | after A.2c; desktop CLS 0.179 before |
+
+SEO is 100 (91–92 on the preview: production has no preview-only issues). The live console was never measured on the
+preview (it can't reach Northstar). Its desktop CLS of 0.179 came from the header: each view's headline arrived with the
+data (A.2b holds its line while loading), and at laptop widths the live pill and the feed's filter no longer fit beside
+each other, so the controls dropped a row (A.2c: stacked below 1500 px from the first frame). Now 0.042, from the web
+fonts swapping in (left as it is). On the dev server: 1350 and 1440 px 0.005, 1536 and 1600 px 0, 800 px 0.044, 390 px 0.022.
+
 ## Fix steps
 - **7.1b Announcements and names:** F5, F2, F16, F18, F1, F13, F3, F4. Pure parts first, with tests (the replay's
   captions in `heroReplay.ts`, what the pill announces).

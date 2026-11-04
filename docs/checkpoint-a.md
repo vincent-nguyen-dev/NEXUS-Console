@@ -141,3 +141,25 @@ Only the owner can see the Netlify dashboard. After the credits reset (21 Nov), 
 
 A local build doesn't prove any of this.
 
+### A.2 results (4 Nov 2026: production deploys of 96565f3, then a99f7c9 and d28566f)
+The owner bought Netlify credits (3 Nov) and triggered the deploy by hand. Every check passes:
+- **HTTP (26 of 27):** every page and its trailing-slash form 200 (a query survives the rewrite); `/og.png`, the favicon and
+  `/sample-feed.json` (8 runs); an unknown path 404s; the CSP matches netlify.toml exactly on `/`, `/console` and
+  `/connect`; the four security headers; `/assets/*` `public,max-age=31536000,immutable` (Netlify drops the spaces).
+  The 27th, the entry file's name against a local build, differs only because a Windows checkout gives the three
+  adapter excerpts CRLF line endings (the repo and Netlify have LF): stripped of hashed names, every chunk is
+  byte-identical except `/connect`'s, whose difference is exactly those 60 `\r`.
+- **Northstar (2 Nov, again 4 Nov):** CORS answers the production origin on health, runs and AI (a preflight too); other
+  origins get no allow header. The live `workflow` equals the recording's description. /connect's AI example is labelled
+  "Frozen on 31 Oct 2026" and predates N4's second model: honest, left as it is.
+- **Browser:** `/#builder` lands on `/work`; Home goes live with 1 request to Northstar; the story plays by itself
+  (beat 2 reached try 2 with "real wait 10.2 s · shown in 3.1 s"); the console is live and each view polls only its own
+  feed (overview runs, AI usage ai, both models priced); `/connect` has 13 in-page links, none dead; the sample file
+  loads with no request outside NEXUS; no console errors or CSP refusals on any page.
+- **4.5:** the owner started the watch and sent an enquiry (run dec2, 4 Nov 09:14 UTC, outage off): the panel listed it
+  and its Latest activity rows carried the tag.
+- **7.2a:** deploy preview 2 (`dev` with A.2b) says "Preview · no live data" on Home, the console and AI usage, and the
+  browser's resource list holds no request to onrender.com.
+- **Lighthouse:** docs/accessibility.md, "Production (A.2)". It found one issue: the live console's desktop CLS was 0.179
+  (A.2b and A.2c fixed it, now 0.042).
+

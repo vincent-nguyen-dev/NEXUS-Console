@@ -93,7 +93,7 @@ repository the project is built in; this one is published from it at review poin
 ## Author
 NEXUS is a portfolio project by **Vincent Nguyen**, available for freelance web development, AI integration and
 automation. Built with AI-assisted development tools; the product, design and engineering decisions, and every
-review, are Vincent's. Get in touch: [vincent.cao.nguyen.work@gmail.com](mailto:vincent.cao.nguyen.work@gmail.com) ·
+review, are mine. Get in touch: [vincent.cao.nguyen.work@gmail.com](mailto:vincent.cao.nguyen.work@gmail.com) ·
 [GitHub profile](https://github.com/vincent-nguyen-dev)
 
 **All rights reserved.** The code is public to read and review, not to reuse.

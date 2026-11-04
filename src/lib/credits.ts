@@ -15,9 +15,9 @@ export const REPO_URL = `${CREDITS.github}/NEXUS-Console`;
 
 /**
  * Whether the repo can be opened. While it's private, a link to it 404s, so the pages say "private for now"
- * instead of showing a link that looks live. The owner flips this when the repo goes public.
+ * instead of showing a link that looks live. Public since 4 Nov 2026 (step 7.3).
  */
-export const REPO_PUBLIC = false;
+export const REPO_PUBLIC = true;
 
 /** The repo's address when it can be opened, or null. */
 export const repoLink = (isPublic: boolean = REPO_PUBLIC): string | null => (isPublic ? REPO_URL : null);

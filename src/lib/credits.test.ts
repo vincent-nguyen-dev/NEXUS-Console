@@ -23,10 +23,10 @@ describe('credits', () => {
 });
 
 describe('the repo link', () => {
-  it('is hidden while the repo is private, so no page shows a link that 404s', () => {
-    expect(REPO_PUBLIC).toBe(false);
-    expect(repoLink()).toBeNull();
-    expect(repoLink(true)).toBe(REPO_URL);
+  it('is shown now the repo is public (4 Nov), and hidden whenever it is private, so no page links a 404', () => {
+    expect(REPO_PUBLIC).toBe(true);
+    expect(repoLink()).toBe(REPO_URL);
+    expect(repoLink(false)).toBeNull();
   });
 });
 

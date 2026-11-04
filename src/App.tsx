@@ -213,6 +213,10 @@ export function App() {
 
   const noData = data === null;
   const failed = noData && (status.kind === 'offline' || status.kind === 'rate_limited' || status.kind === 'api_error' || status.kind === 'preview');
+  // While a view waits for its first answer, its headline's line is held empty so nothing below moves when it
+  // arrives (A.2: the live console's desktop CLS was 0.179). A failure or a preview shows its panel instead.
+  const waiting = status.kind !== 'offline' && status.kind !== 'rate_limited' && status.kind !== 'api_error' && status.kind !== 'preview';
+  const summaryPending = !events && source !== 'file' && waiting && (aiOn ? ai === null : noData);
   let mapNote = 'The map fills in with the first answer from Northstar.';
   if (failed) mapNote = 'No data from Northstar yet, so every track stays dark.';
   if (data?.partial) mapNote = `Withheld: ${text.onlyNewest(RUNS_MAX_LIMIT).replace(/^Y/, 'y')}, and this window has more.`;
@@ -332,6 +336,11 @@ export function App() {
               <p className="max-w-[70ch] text-md">{lines.window}</p>
               {lines.now !== null && <p className="text-base text-muted">{lines.now}</p>}
             </section>
+          )}
+          {summaryPending && (
+            <div aria-hidden="true" className="flex flex-col gap-2">
+              <p className="invisible text-md">&nbsp;</p>
+            </div>
           )}
         </header>
 
